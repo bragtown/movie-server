@@ -1,8 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Movie } from './Movie';
 import axios from "axios";
 import { MoviesService } from './movies.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 
 @ApiTags('Movie')
@@ -13,6 +13,12 @@ export class MoviesController {
   @Get()
   async getMovies() : Promise<Movie[]> {
     return this.movieService.getMovies();
+  }
+
+  @Get('/movie/:id')
+  @ApiParam({name:"id", type:"number"})
+  async getMovie(@Param("id") id: string): Promise<Movie> {
+    return this.movieService.getMovie(parseInt(id, 10));
   }
 
   @Get("/setup")

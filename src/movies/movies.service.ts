@@ -15,4 +15,8 @@ export class MoviesService {
   async getMovies():Promise<Movie[]> {
     return this.movies;
   }
+
+  async getMovie(id: number): Promise<Movie> {
+    return this.movies.find(movie=> movie.id === id);
+  }
 }
