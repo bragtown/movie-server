@@ -19,4 +19,10 @@ export class MoviesService {
   async getMovie(id: number): Promise<Movie> {
     return this.movies.find(movie=> movie.id === id);
   }
+
+  async edit(movie: Movie): Promise<Movie> {
+    let foundMovie = this.movies.find(m=> m.id === movie.id);
+    foundMovie = movie;
+    return foundMovie;
+  }
 }

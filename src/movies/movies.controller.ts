@@ -1,18 +1,30 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { Movie } from './Movie';
 import axios from "axios";
 import { MoviesService } from './movies.service';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 
 
 @ApiTags('Movie')
-@Controller('api/movies')
+@Controller('/api/movies')
 export class MoviesController {
   constructor(private readonly movieService: MoviesService) {}
 
   @Get()
   async getMovies() : Promise<Movie[]> {
     return this.movieService.getMovies();
+  }
+
+  @Post()
+  @ApiBody({type:Movie})
+  async createMovie(@Body() movie:Movie):Promise<Movie> {
+    return this.movieService.createMovie(movie);
+  }
+
+  @Put()
+  @ApiBody({type:Movie})
+  async editMovie(@Body() movie:Movie):Promise<Movie> {
+    return this.movieService.edit(movie);
   }
 
   @Get('/movie/:id')
