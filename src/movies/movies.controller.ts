@@ -2,12 +2,18 @@ import { Controller, Get } from '@nestjs/common';
 import { Movie } from './Movie';
 import axios from "axios";
 import { MoviesService } from './movies.service';
+import { ApiTags } from '@nestjs/swagger';
 
 
+@ApiTags('Movie')
 @Controller('api/movies')
 export class MoviesController {
   constructor(private readonly movieService: MoviesService) {}
 
+  @Get()
+  async getMovies() : Promise<Movie[]> {
+    return this.movieService.getMovies();
+  }
 
   @Get("/setup")
   async setup():Promise<Movie[]> {

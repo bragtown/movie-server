@@ -11,4 +11,8 @@ export class MoviesService {
     this.movies.push(movie);
     return movie;
   }
+
+  getMovies():Promise<Movie[]> {
+    return this.movies;
+  }
 }
