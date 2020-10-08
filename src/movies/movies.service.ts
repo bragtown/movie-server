@@ -12,7 +12,7 @@ export class MoviesService {
     return movie;
   }
 
-  getMovies():Promise<Movie[]> {
+  async getMovies():Promise<Movie[]> {
     return this.movies;
   }
 }
